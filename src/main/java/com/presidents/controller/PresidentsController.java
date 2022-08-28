@@ -24,7 +24,7 @@ public class PresidentsController {
     public President addPresident(@RequestBody President president) {
         return presidentService.savePresident(president);
     }
-//
+//      TODO dopisać kontrollery
 //    @PutMapping("update")
 //    public String updateWithBodyOnly(@RequestBody President president) {
 //        if (PresidentsDB.presidentsRepository.size() - 1 < president.getId()) {
