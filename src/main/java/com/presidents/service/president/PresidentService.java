@@ -4,10 +4,15 @@ import com.presidents.model.dto.PresidentDto;
 import com.presidents.model.entity.President;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PresidentService {
 
     List<PresidentDto> getAllPresidents();
+
+    Set<PresidentDto> findPresidentsByName(String name);
+
+    Set<PresidentDto> findPresidentsByPoliticalParty(String party);
 
     PresidentDto savePresident(PresidentDto presidentDto);
 

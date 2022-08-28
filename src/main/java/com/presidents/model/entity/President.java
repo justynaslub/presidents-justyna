@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 @Entity
-@Table(name = "presidents")
+@Table(name = "PRESIDENTS")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
