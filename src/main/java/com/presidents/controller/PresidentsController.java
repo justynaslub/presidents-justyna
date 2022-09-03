@@ -2,11 +2,10 @@ package com.presidents.controller;
 
 
 import com.presidents.model.dto.PresidentDto;
-import com.presidents.model.entity.President;
-import com.presidents.model.mapper.PresidentMapper;
 import com.presidents.service.president.PresidentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +25,11 @@ public class PresidentsController {
     @PostMapping ("save")
     public PresidentDto addPresident(@RequestBody PresidentDto presidentDto) {
         return presidentService.savePresident(presidentDto);
+    }
+//     exception rozpisany w celach dydaktycznych
+    @ExceptionHandler({RuntimeException.class, IllegalAccessError.class})
+    public final ResponseEntity<Object> handleExceptions(Exception ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping("update")

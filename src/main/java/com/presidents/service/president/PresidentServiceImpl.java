@@ -1,7 +1,6 @@
 package com.presidents.service.president;
 
 import com.presidents.model.dto.PresidentDto;
-import com.presidents.model.entity.President;
 import com.presidents.model.mapper.PresidentMapper;
 import com.presidents.repository.PresidentsRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import static java.util.Objects.nonNull;
-
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 @Service
 @Transactional
@@ -74,7 +73,7 @@ public class PresidentServiceImpl implements PresidentService{
                 president.setPoliticalParty(presidentDto.getPoliticalParty());
             }
             return PresidentMapper.toDto(president);
-        }).get();
+        }).orElseThrow(() -> new RuntimeException("Nie ma takiego prezydenta"));
     }
 
     @Override
