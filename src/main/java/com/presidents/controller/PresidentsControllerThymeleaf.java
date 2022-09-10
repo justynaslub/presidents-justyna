@@ -5,12 +5,11 @@ import com.presidents.model.entity.President;
 import com.presidents.repository.PresidentsRepository;
 import com.presidents.service.president.PresidentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -20,11 +19,17 @@ public class PresidentsControllerThymeleaf {
     private final PresidentService presidentService;
 
     @GetMapping("/")
-    public String getIndex(Model model, @RequestParam(name = "form", required = false, defaultValue = "false")Boolean form) {
-        List<President> presidents = presidentsRepository.findAll();
+    public String getIndex(@RequestParam(name = "form", required = false, defaultValue = "false") Boolean form,
+                           @RequestParam(name = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+                           Model model) {
 
-        model.addAttribute("presidents", presidents);
-        model.addAttribute("presidentDto",new PresidentDto());
+        Page<PresidentDto> presidentsPage = presidentService.getAllPresidentsPaginated(pageNumber-1, 1);
+
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", presidentsPage.getTotalPages());
+        model.addAttribute("totalPresidents", presidentsPage.getTotalElements());
+        model.addAttribute("presidents", presidentsPage.getContent());
+        model.addAttribute("presidentDto", new PresidentDto());
         model.addAttribute("form", form);
         return "index";
     }
@@ -34,4 +39,6 @@ public class PresidentsControllerThymeleaf {
         presidentService.savePresident(presidentDto);
         return "redirect:/";
     }
+
+
 }

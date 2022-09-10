@@ -11,7 +11,7 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img th:src="@{flag-usa.jpg}" width="120" height="80" alt="USA flag"></a>
+            <a class="navbar-brand" href="#"><img th:src="@{flag-usa.jpg}" width="160" height="100" alt="USA flag"></a>
             <a class="navbar-brand" href="#">USA PRESIDENTS APPLICATION</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,6 +79,30 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div th:if="${totalPages > 1}">
+        <div class="row cols-sm-8">
+            <div class="col-sm-2">
+                Number of Presidents: [[${totalPresidents}]]
+            </div>
+            <div class="col-sm-1">
+                Pages:
+            </div>
+            <div class="col-sm-1" >
+                <a th:if="${currentPage > 1}" th:href="@{'/?pageNumber=' + ${currentPage - 1}}">Previous</a>
+            </div>
+            <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:href="@{'/?pageNumber=' + ${i}}">[[${i}]]</a>
+            </span>
+            </div>
+            <div class="col-sm-1" >
+                <a th:if="${currentPage < totalPages}" th:href="@{'/?pageNumber=' + ${currentPage + 1}}">Next</a>
+            </div>
+            <div class="col-sm-1" >
+                <a th:if="${currentPage != totalPages}" th:href="@{'/?pageNumber=' + ${totalPages}}">Last</a>
+            </div>
+        </div>
     </div>
 </div>
 </body>

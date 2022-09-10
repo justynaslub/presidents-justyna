@@ -58,4 +58,9 @@ public class PresidentsController {
     public Set<PresidentDto> getPresidentsByPoliticalParty(@PathVariable String party) {
         return presidentService.findPresidentsByPoliticalParty(party);
     }
+
+    @GetMapping("/all-paginated")
+    public List<PresidentDto> getPresidentsPaginated(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return presidentService.getAllPresidentsPaginated(pageNumber, pageSize).getContent();
+    }
 }
