@@ -1,7 +1,6 @@
 package com.presidents.service.president;
 
 import com.presidents.model.dto.PresidentDto;
-import com.presidents.model.entity.President;
 
 import java.util.List;
 import java.util.Set;

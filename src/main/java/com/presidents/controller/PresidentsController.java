@@ -24,7 +24,7 @@ public class PresidentsController {
 
     @PostMapping ("save")
     @ResponseStatus(HttpStatus.CREATED)
-    public PresidentDto savePresident(@Valid @RequestBody PresidentDto presidentDto) {
+    public PresidentDto save(@Valid @RequestBody PresidentDto presidentDto) {
         return presidentService.savePresident(presidentDto);
     }
 //     exception rozpisany w celach dydaktycznych
